@@ -5,7 +5,8 @@ import Data.List
 import System.Random
 
 main = do
-    create_board 1
+    let b = create_board 1
+    print_board b
 
 create_board :: Int -> Board
 create_board diff = do
@@ -14,11 +15,18 @@ create_board diff = do
     let tile = Tile False False 0
     [ [tile | x <- [0..num_cols]] | y <- [0..num_rows] ]
 
-print_board :: Board -> IO()
-print_board = do 
-    1
-    
---first_row :: 
+print_board :: Board -> [IO()]
+print_board board = do 
+    let cols = [(" " ++ (show col))++ if col < 10 then " " else "" | col <- [0..length (board !! 0)] ]
+    --mapM_ putStr cols
+    --putStr "\n"
+    map (mapM_ print_tile) board
+
+print_tile :: Tile -> IO()
+print_tile tile = do
+    if (revealed tile)
+        then putStr (show (counter tile))
+    else putStr "X"
 
 get_board_rows :: Int -> Int
 get_board_rows diff = do

@@ -5,7 +5,7 @@ import Data.List
 data Game = Game { difficulty :: Int
                 ,  board :: Board }
 
-data Board = Board [[Tile]]
+type Board = [[Tile]]
 
 data Tile = Tile { revealed :: Bool
                 ,  bomb :: Bool
